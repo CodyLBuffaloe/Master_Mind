@@ -1,19 +1,18 @@
 module MasterMind
   class Computer
-      attr_reader :value
-      attr_accessor :color_set
+      attr_reader :value, :color_set
+
 
       def initialize(value)
-
+        @code = []
       end
 
       def create_code(color_set)
-        code = []
-    #randomly generates a 4 element array of nums between 1 and 6
+#randomly generates a 4 element array of nums between 1 and 6
         while code.size < 3
           code << rand(1..6)
         end
-    #turns those array integers into the colors that must be guessed
+#turns those array integers into the colors that must be guessed
         code.each_with_index do |el, index|
           color_set.each do |key, value|
             if(code[index]== key)
@@ -25,3 +24,4 @@ module MasterMind
       end
     end
 end
+puts @code

@@ -1,7 +1,7 @@
 module MasterMind
   class Human
-      attr_reader :value
-      def initialize(value, name)
+      attr_reader :color_set
+      def initialize(name)
         @name = name
       end
 
