@@ -1,1 +1,0 @@
-require_relative "../lib/Master_Mind.rb"
