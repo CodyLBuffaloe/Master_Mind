@@ -1,8 +1,8 @@
 module MasterMind
   class Human
-      attr_reader :color_set
-      def initialize(name)
-        @name = name
+      attr_reader :name
+      def initialize(input)
+        @name = input.fetch(:name)
       end
 
       def guesses

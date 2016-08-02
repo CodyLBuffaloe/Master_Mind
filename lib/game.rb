@@ -1,11 +1,10 @@
 module MasterMind
   class Game
+    attr_reader :code, :color_set
 
-
-    def initialize
-
+    def initialize(board = Board.new)
+      @board = board
 
     end
   end
 end
-puts @secret_code
