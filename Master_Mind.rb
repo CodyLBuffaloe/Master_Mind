@@ -1,4 +1,5 @@
 module MasterMind
+
 end
 require_relative "./lib/block.rb"
 require_relative "./lib/board.rb"

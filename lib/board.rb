@@ -1,5 +1,6 @@
 module MasterMind
   class Board
+    require './block'
     attr_reader :guess_grid, :hint_grid
     def initialize(input = {})
       @guess_grid = input.fetch(:guess_grid, default_grid)
@@ -23,13 +24,22 @@ module MasterMind
       end
     end
 
-    def guess
+    def formatted_boards
+      puts "Guess Board"
+      guess_grid.each do |row|
+         row.map{ |block| block.value.empty? ? "__" : block.value }.join(" ")
+      end
+      puts "Hint Board"
+      hint_grid.each do |row|
+         row.map{ |block| block.value.empty? ? "__" : block.value }.join(" ")
+      end
+
     end
 
-    def winner?
-      if
-      end
-    end
+#    def winner?
+#      if
+#      end
+#    end
 
     private
 
@@ -38,5 +48,6 @@ module MasterMind
     end
   end
 end
-color_set = { 1 => :red, 2 => :blue, 3 => :yellow, 4 => :orange, 5 => :green, 6 => :purple }
-         accuracy_markers = [:white, :black]
+
+b = MasterMind::Board.new
+b.formatted_boards
