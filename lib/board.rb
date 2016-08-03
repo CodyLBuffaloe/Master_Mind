@@ -25,15 +25,18 @@ module MasterMind
     end
 
     def formatted_boards
-      puts "Guess Board"
+      puts "Guess Board     Hint Board"
+      g_row = []
       guess_grid.each do |row|
-         row.map{ |block| block.value.empty? ? "__" : block.value }.join(" ")
+         g_row << row.map{ |block| block.value.empty? ? "__" : block.value }.join(" ")
       end
-      puts "Hint Board"
+      h_row = []
       hint_grid.each do |row|
-         row.map{ |block| block.value.empty? ? "__" : block.value }.join(" ")
+         h_row << row.map{ |block| block.value.empty? ? "__" : block.value }.join(" ")
       end
-
+      g_row.each_with_index do |row, index|
+        puts row.strip + "     " + h_row[index].strip
+      end
     end
 
 #    def winner?
