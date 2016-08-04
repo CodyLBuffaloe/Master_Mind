@@ -3,26 +3,28 @@ module MasterMind
     require './block'
     attr_reader :guess_grid, :hint_grid
     def initialize(input = {})
-      @guess_grid = input.fetch(:guess_grid, default_grid)
+      @guess_grid = input.fetch(guess_grid, default_grid)
       @hint_grid = input.fetch(:hint_grid, default_grid)
     end
 
     def get_block(x, y)
-      guess_grid[y][x]
-      hint_grid[y][x]
+      puts x
+      puts y
+      @guess_grid[y][x]
+      @hint_grid[y][x]
     end
 
     def set_block(x, y, value)
       get_block(x, y).value = value
     end
 
-    def game_over
-      if(winner?)
-        return :winner
-      else
-        return false
-      end
-    end
+   #def game_over
+    #  if(winner?)
+     #   return :winner
+      #else
+       # return false
+      #end
+    #end
 
     def formatted_boards
       puts "Guess Board     Hint Board"
@@ -36,8 +38,11 @@ module MasterMind
       end
       g_row.each_with_index do |row, index|
         puts row.strip + "     " + h_row[index].strip
+
       end
     end
+
+
 
 #    def winner?
 #      if
@@ -52,5 +57,4 @@ module MasterMind
   end
 end
 
-b = MasterMind::Board.new
-b.formatted_boards
+
