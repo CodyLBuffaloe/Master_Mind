@@ -7,19 +7,20 @@ module MasterMind
       @board = board
       #@players = players
       @guesses = guesses
-      @guess = []
+
+
     end
 
-    def get_guess(guess = ["red", "blue", "green", "yellow"] )
-     #gets.split(" ")
-     puts guess
+    def get_guess(guess)
+     #gets.split()
+     current_guess = []
      guess.each do |x|
-       @guess << x.to_sym
+       current_guess << x.to_sym
      end
-     @guess.each_with_index do |x, i|
-       puts "#{x}, #{i}"
-     end
+     return current_guess
     end
+
+
 
 
 
@@ -41,19 +42,21 @@ module MasterMind
      # end
     end
 
-    #def play
-     # while true
-      #  board.formatted_boards
-       # puts ""
-        #puts solicit_guess
+    def play
+      while guesses >= 0
 
-        #board.set_block(x, y, guess)
+        puts ""
+        puts solicit_guess
+        this_guess = get_guess(["red", "blue", "green", "yellow"])
+        board.draw_guess_grid(this_guess)
         #if board.game_over
-         #puts game_over_message
-         #return
+         # puts game_over_message
+          #return
         #end
-      #end
-    #end
+        @guesses -=1
+      end
+
+    end
 
   private
 
@@ -66,4 +69,6 @@ end
 
 
 g = MasterMind::Game.new()
-g.get_guess
+g.play
+g.get_guess(["red", "blue", "green", "yellow"])
+g.get_guess(["red", "blue", "green", "yellow"])

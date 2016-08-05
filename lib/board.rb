@@ -5,18 +5,30 @@ module MasterMind
     def initialize(input = {})
       @guess_grid = input.fetch(guess_grid, default_grid)
       @hint_grid = input.fetch(:hint_grid, default_grid)
+      @all_guesses = []
     end
 
-    def get_block(x, y)
-      puts x
-      puts y
-      @guess_grid[y][x]
-      @hint_grid[y][x]
+    def print_guess(current_guess)
+      @all_guesses << current_guess
+
     end
 
-    def set_block(x, y, value)
-      get_block(x, y).value = value
+    def draw_guess_grid(all_guesses)
+      puts @all_guesses.length
+      @all_guesses.each do |line|
+        puts line
+      end
+      puts "\n"
+      puts @all_guesses.length
+
+      guesses_left = @all_guesses.length
+      (12 - guesses_left).times do
+        puts "_ _ _ _"
+
+      end
     end
+
+
 
    #def game_over
     #  if(winner?)
