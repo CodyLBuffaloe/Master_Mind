@@ -11,13 +11,13 @@ module MasterMind
 
     end
 
-    def get_guess(guess)
-     #gets.split()
-     current_guess = []
-     guess.each do |x|
-       current_guess << x.to_sym
-     end
-     return current_guess
+    def get_guess()
+      guess = "red blue green yellow".split()
+      current_guess = []
+      guess.each do |x|
+        current_guess << x.to_sym
+      end
+      board.print_guess(current_guess)
     end
 
 
@@ -47,7 +47,7 @@ module MasterMind
 
         puts ""
         puts solicit_guess
-        this_guess = get_guess(["red", "blue", "green", "yellow"])
+        this_guess = get_guess()
         board.draw_guess_grid(this_guess)
         #if board.game_over
          # puts game_over_message
@@ -69,6 +69,5 @@ end
 
 
 g = MasterMind::Game.new()
+
 g.play
-g.get_guess(["red", "blue", "green", "yellow"])
-g.get_guess(["red", "blue", "green", "yellow"])

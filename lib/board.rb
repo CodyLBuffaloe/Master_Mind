@@ -2,6 +2,7 @@ module MasterMind
   class Board
     require './block'
     attr_reader :guess_grid, :hint_grid
+    attr_accessor :all_guesses
     def initialize(input = {})
       @guess_grid = input.fetch(guess_grid, default_grid)
       @hint_grid = input.fetch(:hint_grid, default_grid)
