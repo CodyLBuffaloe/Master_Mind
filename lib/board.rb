@@ -10,22 +10,18 @@ module MasterMind
     end
 
     def print_guess(current_guess)
-      @all_guesses << current_guess
+      @all_guesses << current_guess.join(",")
 
     end
 
     def draw_guess_grid(all_guesses)
-      puts @all_guesses.length
+
       @all_guesses.each do |line|
         puts line
       end
-      puts "\n"
-      puts @all_guesses.length
-
       guesses_left = @all_guesses.length
       (12 - guesses_left).times do
         puts "_ _ _ _"
-
       end
     end
 
