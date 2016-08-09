@@ -53,10 +53,10 @@ module MasterMind
 
 
 
-#    def winner?
-#      if
-#      end
-#    end
+   def winner?
+     if()
+      end
+   end
 
     private
 

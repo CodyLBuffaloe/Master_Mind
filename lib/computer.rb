@@ -1,6 +1,7 @@
 module MasterMind
   class Computer
     require "./colors"
+    require "./game.rb"
       attr_accessor :code, :color_set
 
       def initialize
@@ -24,7 +25,7 @@ module MasterMind
           end
         end
         @code = @code.join(",")
-        return @code
+        Game.get_code(@code)
       end
     end
 end
