@@ -1,4 +1,4 @@
-module MasterMind
+
   class Colors
     attr_accessor :color_set, :hint_colors
 
@@ -8,4 +8,3 @@ module MasterMind
     end
   end
 
-end

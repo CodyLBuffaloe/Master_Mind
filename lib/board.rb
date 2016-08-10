@@ -1,4 +1,4 @@
-module MasterMind
+
   class Board
     require './block'
     attr_reader :guess_grid, :hint_grid
@@ -64,6 +64,6 @@ module MasterMind
       Array.new(12) { Array.new(4) { Block.new } }
     end
   end
-end
+
 
 

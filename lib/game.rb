@@ -1,16 +1,19 @@
-module MasterMind
+require "./board.rb"
+require "./computer.rb"
+
+
   class Game
-    require "./board.rb"
-    require "./computer.rb"
-    attr_reader :players, :board, :guesses, :guess
+    attr_reader :players, :board, :guesses, :guess, :computer
     attr_accessor :secret_code
-
+    @board
+    @computer
+    @guesses
+    @secret_code
     def initialize(board = Board.new, guesses = 1, computer = Computer.new)
-      @board = board
-      @computer = computer
-      @guesses = guesses
-      @secret_code
-
+    @board = board
+    @computer = computer
+    @guesses = guesses
+    @secret_code = @computer.create_code()
 
     end
 
@@ -23,9 +26,7 @@ module MasterMind
       board.print_guess(current_guess)
     end
 
-    def get_code(code)
-      @secret_code = code
-    end
+
 
 
 
@@ -49,8 +50,7 @@ module MasterMind
 
     def play
 
-      while guesses <= 12
-
+      while @guesses <= 12
         puts ""
         puts solicit_guess
         this_guess = get_guess()
@@ -61,19 +61,17 @@ module MasterMind
         #end
         @guesses +=1
       end
-      p @secret_code
+
     end
 
   private
 
-    def guess_to_coordinate(guess)
 
-    end
 
   end
-end
 
 
-g = MasterMind::Game.new()
+
+g = Game.new()
 
 g.play

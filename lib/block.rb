@@ -1,4 +1,4 @@
-module MasterMind
+
   class Block
     attr_accessor :value
 
@@ -7,4 +7,3 @@ module MasterMind
     end
   end
 
-end
