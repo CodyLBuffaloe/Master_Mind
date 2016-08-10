@@ -9,13 +9,9 @@
       @all_guesses = []
     end
 
-    def print_guess(current_guess)
+
+    def draw_guess_grid(current_guess)
       @all_guesses << current_guess.join(",")
-
-    end
-
-    def draw_guess_grid(all_guesses)
-
       @all_guesses.each do |line|
         puts line
       end

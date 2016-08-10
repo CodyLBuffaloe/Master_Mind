@@ -17,13 +17,12 @@ require "./computer.rb"
 
     end
 
-    def get_guess()
-      guess = "red blue green yellow".split()
+    def get_guess(guess = gets.split())
       current_guess = []
       guess.each do |x|
         current_guess << x.to_sym
       end
-      board.print_guess(current_guess)
+      return current_guess
     end
 
 
@@ -61,7 +60,7 @@ require "./computer.rb"
         #end
         @guesses +=1
       end
-
+      p @secret_code
     end
 
   private
