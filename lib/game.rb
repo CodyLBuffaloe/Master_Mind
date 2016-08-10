@@ -34,17 +34,17 @@ require "./computer.rb"
     end
 
     def game_over_message
-      #if(board.game_over == :winner)
-       # puts "Congrats, you won!"
-     # else
-      #  puts "You didn't guess the code! Would you like to try again? Type yes or no."
-       # answer = gets.chomp
-        #if(answer == "yes")
-         # Game.new
-        #else
-         # exit
-        #end
-     # end
+      if(board.game_over == :winner)
+        puts "Congrats, you won!"
+      elsif(board.game_over == :not_yet && @guesses == 12)
+        puts "You didn't guess the code! Would you like to try again? Type yes or no."
+        answer = gets.chomp
+        if(answer == "yes")
+          Game.new
+        else
+          exit
+        end
+      end
     end
 
     def play
@@ -53,11 +53,12 @@ require "./computer.rb"
         puts ""
         puts solicit_guess
         this_guess = get_guess()
+        puts "\n\n"
         board.draw_guess_grid(this_guess)
-        #if board.game_over
-         # puts game_over_message
-          #return
-        #end
+        board.win_test(secret_code, this_guess)
+        if(board.game_over)
+          game_over_message()
+        end
         @guesses +=1
       end
       p @secret_code

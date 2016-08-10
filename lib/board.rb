@@ -7,6 +7,7 @@
       @guess_grid = input.fetch(guess_grid, default_grid)
       @hint_grid = input.fetch(:hint_grid, default_grid)
       @all_guesses = []
+      @winner
     end
 
 
@@ -21,40 +22,25 @@
       end
     end
 
+    def win_test(secret_code, this_guess)
+      this_guess.map! { |color| color.to_sym}
 
-
-   #def game_over
-    #  if(winner?)
-     #   return :winner
-      #else
-       # return false
-      #end
-    #end
-
-    def formatted_boards
-      puts "Guess Board     Hint Board"
-      g_row = []
-      guess_grid.each do |row|
-         g_row << row.map{ |block| block.value.empty? ? "__" : block.value }.join(" ")
-      end
-      h_row = []
-      hint_grid.each do |row|
-         h_row << row.map{ |block| block.value.empty? ? "__" : block.value }.join(" ")
-      end
-      g_row.each_with_index do |row, index|
-        puts row.strip + "     " + h_row[index].strip
-
+      if(secret_code == this_guess)
+        @winner = :winner
+      else
+        @winner = :not_yet
       end
     end
 
-
-
-   def winner?
-     if()
+    def game_over
+      if(@winner == :winner)
+        return :winner
+      else
+        return :not_yet
       end
-   end
+    end
 
-    private
+   private
 
     def default_grid
       Array.new(12) { Array.new(4) { Block.new } }
