@@ -40,7 +40,7 @@ require "./computer.rb"
         puts "You didn't guess the code! Would you like to try again? Type yes or no."
         answer = gets.chomp
         if(answer == "yes")
-          Game.new
+          Game.new.play
         else
           exit
         end
