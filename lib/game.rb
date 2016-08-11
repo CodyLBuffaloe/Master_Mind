@@ -33,11 +33,11 @@ require "./computer.rb"
       puts "Player, enter four of the six following colors to make your guess at the code:\n red, blue, green, yellow, purple and orange"
     end
 
-    def game_over_message
-      if(board.game_over == :winner)
+    def game_over_message(message)
+      if(message == :winner)
         puts "Congrats, you won!"
-      elsif(board.game_over == :not_yet && @guesses == 12)
-        puts "You didn't guess the code! Would you like to try again? Type yes or no."
+      elsif(message == :not_yet && @guesses == 12)
+        puts "You didn't yet guess the code! Would you like to try again? Type yes or no."
         answer = gets.chomp
         if(answer == "yes")
           Game.new.play
@@ -52,12 +52,16 @@ require "./computer.rb"
       while @guesses <= 12
         puts ""
         puts solicit_guess
+        puts @secret_code
         this_guess = get_guess()
         puts "\n\n"
         board.draw_guess_grid(this_guess)
-        board.win_test(secret_code, this_guess)
-        if(board.game_over)
-          game_over_message()
+        board.win?(secret_code, this_guess)
+        if(board.game_over() == :winner)
+          game_over_message(:winner)
+          break
+        elsif(board.game_over() == :not_yet)
+          game_over_message(:not_yet)
         end
         @guesses +=1
       end
