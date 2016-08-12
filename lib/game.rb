@@ -1,20 +1,17 @@
 require "./board.rb"
 require "./computer.rb"
+require "./hint.rb"
 
 
   class Game
     attr_reader :players, :board, :guesses, :guess, :computer
     attr_accessor :secret_code
-    @board
-    @computer
-    @guesses
-    @secret_code
-    def initialize(board = Board.new, guesses = 1, computer = Computer.new)
-    @board = board
-    @computer = computer
-    @guesses = guesses
-    @secret_code = @computer.create_code()
 
+    def initialize(board = Board.new, guesses = 1, computer = Computer.new)
+      @board = board
+      @computer = computer
+      @guesses = guesses
+      @secret_code = @computer.create_code()
     end
 
     def get_guess(guess = gets.split())
@@ -35,26 +32,28 @@ require "./computer.rb"
 
     def game_over_message(message)
       if(message == :winner)
-        puts "Congrats, you won!"
+        puts "Congrats, you won! Would you like to play again? 'yes' or 'no' "
+        answer = gets.chomp
       elsif(message == :not_yet && @guesses == 12)
         puts "You didn't yet guess the code! Would you like to try again? Type yes or no."
         answer = gets.chomp
-        if(answer == "yes")
-          Game.new.play
-        else
-          exit
-        end
+      end
+
+      if(answer == "yes")
+        Game.new.play
+      else
+        exit
       end
     end
 
     def play
-
       while @guesses <= 12
         puts ""
         puts solicit_guess
         puts @secret_code
         this_guess = get_guess()
         puts "\n\n"
+        Hint.new(this_guess, secret_code).provide_hint_grid
         board.draw_guess_grid(this_guess)
         board.win?(secret_code, this_guess)
         if(board.game_over() == :winner)
@@ -67,10 +66,6 @@ require "./computer.rb"
       end
       p @secret_code
     end
-
-  private
-
-
 
   end
 

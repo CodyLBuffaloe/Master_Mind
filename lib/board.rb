@@ -24,8 +24,6 @@ class Board
 
     def win?(secret_code, this_guess)
       secret_code = secret_code.split(",")
-      puts secret_code.size
-      puts this_guess.size
         this_guess.each_with_index do | color, index|
           secret_code[index] = secret_code[index].to_sym
           if (this_guess[index] == secret_code[index])
