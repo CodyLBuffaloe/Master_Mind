@@ -22,10 +22,6 @@ require "./hint.rb"
       return current_guess
     end
 
-
-
-
-
     def solicit_guess
       puts "Player, enter four of the six following colors to make your guess at the code:\n red, blue, green, yellow, purple and orange"
     end
@@ -53,8 +49,9 @@ require "./hint.rb"
         puts @secret_code
         this_guess = get_guess()
         puts "\n\n"
-
-        puts [board.draw_guess_grid(this_guess)], [Hint.new(this_guess, secret_code).draw_hint_grid]
+        puts board.draw_guess_grid(this_guess)
+        puts "\n\n"
+        puts Hint.new(this_guess, secret_code).draw_hint_grid
         board.win?(secret_code, this_guess)
         if(board.game_over() == :winner)
           game_over_message(:winner)
