@@ -37,14 +37,14 @@ require "./hint.rb"
 
       if(answer == "yes")
         Game.new.play
-      else
+      elsif(answer == "no")
         exit
       end
     end
 
     def play
       while @guesses <= 12
-        puts ""
+        puts "\n"
         puts solicit_guess
         puts @secret_code
         this_guess = get_guess()
@@ -53,12 +53,11 @@ require "./hint.rb"
         puts "\n\n"
         puts Hint.new(this_guess, secret_code).draw_hint_grid
         board.win?(secret_code, this_guess)
+        message = board.game_over
         if(board.game_over() == :winner)
-          game_over_message(:winner)
-          break
-        elsif(board.game_over() == :not_yet)
-          game_over_message(:not_yet)
+          game_over_message(message)
         end
+
         @guesses +=1
       end
       p @secret_code
