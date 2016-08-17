@@ -25,18 +25,11 @@ class Board
     def win?(secret_code, this_guess)
       secret_code = secret_code.split(",")
       secret_code.map!{ |x| x.to_sym}
-        this_guess.each_with_index do | color, index|
-          if (this_guess[index] == secret_code[index])
-            @winner = true
-          else
-            @winner = false
-            puts secret_code[0].class
-            puts this_guess[0].class
-          end
-        end
-        puts "#win? got called"
-        puts @winner
-
+      if(secret_code == this_guess)
+        @winner = true
+      else
+        @winner = false
+      end
     end
 
     def game_over
