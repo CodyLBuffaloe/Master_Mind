@@ -51,7 +51,8 @@ require "./hint.rb"
         puts "\n\n"
         puts board.draw_guess_grid(this_guess)
         puts "\n\n"
-        puts Hint.new(this_guess, secret_code).draw_hint_grid
+        correct_code = @secret_code
+        puts Hint.new(this_guess, correct_code).draw_hint_grid
         board.win?(secret_code, this_guess)
         message = board.game_over
         if(board.game_over() == :winner)

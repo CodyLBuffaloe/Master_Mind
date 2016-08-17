@@ -1,8 +1,8 @@
 require "./colors.rb"
 class Hint
-  def initialize(this_guess, secret_code)
-    @single_guess = this_guess
-    @code_2_match = secret_code
+  def initialize(this_guess, correct_code)
+    @guess_code = this_guess
+    @correct_code = correct_code.split(",")
     @hint_colors = Colors.new.hint_colors
     @all_hints = []
     @hint_display = []
@@ -10,16 +10,15 @@ class Hint
 
 
 
-  def draw_hint_grid
-    @single_guess.each_with_index do | color, index |
-      @single_guess[index] = @single_guess[index].to_sym
-      if(@single_guess[index] == @code_2_match[index])
-        @hint_display << hint_colors[0]
+  def draw_hint_grid()
+    @guess_code.each_with_index do | color, index |
+      if(@guess_code[index] == @correct_code[index].to_sym)
+        @hint_display << :black
       end
     end
-    @all_hints << @hint_display
-    @all_hints.each do |hint|
-      puts hint
+    @all_hints << @hint_display.join(",")
+    @all_hints.each do |line|
+      puts line
     end
     spaces_filled = @all_hints.length
     (12 - spaces_filled).times do
