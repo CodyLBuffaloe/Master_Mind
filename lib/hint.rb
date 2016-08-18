@@ -13,7 +13,7 @@ class Hint
   def draw_hint_grid()
     @guess_code.each_with_index do | color, index |
       if(@guess_code[index] == @correct_code[index].to_sym)
-        @hint_display << :black
+        @hint_display << @hint_colors[0]
       end
     end
     @all_hints << @hint_display.join(",")
