@@ -11,9 +11,14 @@ class Hint
 
 
   def draw_hint_grid()
+    @correct_code.map!{|x| x.to_sym}
     @guess_code.each_with_index do | color, index |
-      if(@guess_code[index] == @correct_code[index].to_sym)
+      if(@correct_code.include?(color) && @guess_code[index] != @correct_code[index])
+        @hint_display << @hint_colors[1]
+      elsif(@guess_code[index] == @correct_code[index])
         @hint_display << @hint_colors[0]
+      else
+        @hint_display << "_"
       end
     end
     @all_hints << @hint_display.join(",")
