@@ -12,6 +12,7 @@ require "./hint.rb"
       @computer = computer
       @guesses = guesses
       @secret_code = @computer.create_code()
+      @hint = Hint.new
     end
 
     def get_guess(guess = gets.split())
@@ -52,7 +53,7 @@ require "./hint.rb"
         puts board.draw_guess_grid(this_guess)
         puts "\n\n"
         correct_code = @secret_code
-        puts Hint.new(this_guess, correct_code).draw_hint_grid
+        puts @hint.draw_hint_grid(this_guess, correct_code)
         board.win?(secret_code, this_guess)
         message = board.game_over
         if(board.game_over() == :winner)
