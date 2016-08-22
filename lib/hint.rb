@@ -17,13 +17,12 @@ class Hint
     @correct_code = correct_code.split(",")
     hint_display = []
     @correct_code.map!{|x| x.to_sym}
-    @guess_code.each_with_index do | color, index |
+    @correct_code.each_with_index do | color, index |
       if(@guess_code[index] == @correct_code[index])
         hint_display << @hint_colors[0]
       elsif(@correct_code.include?(color) && @guess_code[index] != @correct_code[index])
-        (@correct_code.count(color)).times do
           hint_display << @hint_colors[1]
-        end
+
       else
         hint_display << "_"
       end
