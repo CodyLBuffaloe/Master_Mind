@@ -28,14 +28,16 @@ require "./hint.rb"
     end
 
     def game_over_message(message)
-      if(message == :winner)
-        puts "Congrats, you won! Would you like to play again? 'yes' or 'no' "
-        answer = gets.chomp
-      elsif(message == :not_yet && @guesses == 12)
-        puts "You didn't yet guess the code! Would you like to try again? Type yes or no."
-        answer = gets.chomp
+      case message
+        when :winner
+          puts "Congrats, you won! Would you like to play again? 'yes' or 'no' "
+          answer = gets.chomp
+        when :not_yet
+          if(@guesses == 12)
+            puts "You didn't yet guess the code! Would you like to try again? Type yes or no."
+            answer = gets.chomp
+          end
       end
-
       if(answer == "yes")
         Game.new.play
       elsif(answer == "no")
@@ -56,7 +58,7 @@ require "./hint.rb"
         puts @hint.draw_hint_grid(this_guess, correct_code)
         board.win?(secret_code, this_guess)
         message = board.game_over
-        if(board.game_over() == :winner)
+        if(board.game_over() == :winner || board.game_over() == :not_yet)
           game_over_message(message)
         end
 
