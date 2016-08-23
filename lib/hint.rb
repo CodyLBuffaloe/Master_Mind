@@ -44,4 +44,21 @@ class Hint
       end
     end
   end
+
+  def get_white()
+    @guess_code.each do |color|
+      guess_color_count = @guess_code.count(color)
+      correct_color_count = @correct_code.count(color)
+      if(guess_color_count >= correct_color_count)
+         (correct_color_count).times do
+           @hint_display << @hint_colors[1]
+         end
+      else
+         (guess_color_count).times do
+           @hint_display << @hint_colors[1]
+         end
+      end
+    end
+
+  end
 end
