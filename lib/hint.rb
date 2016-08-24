@@ -5,7 +5,6 @@ class Hint
     @correct_code
     @hint_colors = Colors.new.hint_colors
     @all_hints = []
-    @hint_display = []
   end
 
 
@@ -19,15 +18,32 @@ class Hint
     @guess_code = this_guess
     @correct_code = correct_code.split(",")
     @correct_code.map!{|x| x.to_sym}
+    empty_count = get_empties()
     black_count = get_black()
-    @correct_code.each_with_index do | color, index |
-      if(@correct_code.include?(color) && @guess_code[index] != @correct_code[index])
-          @hint_display << @hint_colors[1]
+    white_count = get_white()
+    hint_display = []
+    black_count.times do
+      hint_display << @hint_colors[0]
+    end
+    puts "BC"
+    puts black_count
+    puts "WC"
+    puts white_count
+    if(!white_count.empty?)
+      if(white_count > black_count)
+        (white_count - black_count).times do
+          hint_display << @hint_colors[1]
+        end
       else
-        @hint_display << "_"
+        white_count.times do
+          hint_display << @hint_colors[1]
+        end
       end
     end
-    @all_hints << @hint_display.join(",")
+    empty_count.times do
+      hint_display << "_"
+    end
+    @all_hints << hint_display.join(",")
     @all_hints.each do |line|
       puts line
     end
@@ -35,30 +51,42 @@ class Hint
     (12 - spaces_filled).times do
       puts "_ _ _ _"
     end
+    puts black_count
+    puts white_count
+    puts empty_count
+  end
+
+  def get_empties()
+    empties = 0
+    @guess_code.each do |color|
+      if(!@correct_code.include?(color))
+        empties += 1
+      end
+    end
+    return empties
   end
 
   def get_black()
-    @correct_code.each_index do |index|
-      if(@guess_code[index] == @correct_code[index])
-        @hint_display << @hint_colors[0]
+    black_count = 0
+    @correct_code.each_with_index do |color, index|
+      if(@correct_code.include?(color) && @guess_code[index] == @correct_code[index])
+        black_count +=1
       end
     end
+    return black_count
   end
 
   def get_white()
-    @guess_code.each do |color|
-      guess_color_count = @guess_code.count(color)
-      correct_color_count = @correct_code.count(color)
-      if(guess_color_count >= correct_color_count)
-         (correct_color_count).times do
-           @hint_display << @hint_colors[1]
-         end
-      else
-         (guess_color_count).times do
-           @hint_display << @hint_colors[1]
-         end
+    @guess_code.each_with_index do |color, index|
+        guess_color_count = @guess_code.count(color)
+      if(@correct_code[index] != @guess_code[index] && @correct_code.include?(color) )
+        correct_color_count = @correct_code.count(color)
+        if(guess_color_count > correct_color_count)
+          return correct_color_count
+        else
+          return guess_color_count
+        end
       end
     end
-
   end
 end
