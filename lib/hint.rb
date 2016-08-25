@@ -22,13 +22,14 @@ class Hint
     black_count = get_black()
     white_count = get_white()
     hint_display = []
-    black_count.times do
-      hint_display << @hint_colors[0]
-    end
     puts "BC"
     puts black_count
     puts "WC"
     puts white_count
+
+      black_count.times do
+        hint_display << @hint_colors[0]
+      end
       if(white_count > black_count)
         (white_count - black_count).times do
           hint_display << @hint_colors[1]
@@ -38,9 +39,10 @@ class Hint
           hint_display << @hint_colors[1]
         end
       end
-    empty_count.times do
-      hint_display << "_"
-    end
+      empty_count.times do
+        hint_display << "_"
+      end
+
     @all_hints << hint_display.join(",")
     @all_hints.each do |line|
       puts line
@@ -75,18 +77,18 @@ class Hint
   end
 
   def get_white()
+    white_count = 0
     @guess_code.each_with_index do |color, index|
-        guess_color_count = @guess_code.count(color)
-      if(@correct_code[index] != @guess_code[index] && @correct_code.include?(color) )
-        correct_color_count = @correct_code.count(color)
-        if(guess_color_count > correct_color_count)
-          return correct_color_count
+      if(@correct_code.include?(color) && @correct_code[index] != @guess_code[index] )
+        if(@guess_code.count(color) > @correct_code.count(color))
+          white_count += @correct_code.count(color)
         else
-          return guess_color_count
+          white_count += @guess_code.count(color)
         end
       else
         return 0
       end
     end
+    return white_count
   end
 end
