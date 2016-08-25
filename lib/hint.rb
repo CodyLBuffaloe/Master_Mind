@@ -26,11 +26,10 @@ class Hint
     puts black_count
     puts "WC"
     puts white_count
-
-      black_count.times do
-        hint_display << @hint_colors[0]
-      end
-      if(white_count > black_count)
+    black_count.times do
+      hint_display << @hint_colors[0]
+    end
+      if(white_count >= black_count)
         (white_count - black_count).times do
           hint_display << @hint_colors[1]
         end
@@ -79,6 +78,10 @@ class Hint
   def get_white()
     white_count = 0
     @guess_code.each_with_index do |color, index|
+      if(@guess_code.count(color) == 4)
+        white_count = 0
+        break
+      end
       if(@correct_code.include?(color) && @correct_code[index] != @guess_code[index] )
         if(@guess_code.count(color) > @correct_code.count(color))
           white_count += @correct_code.count(color)
@@ -86,7 +89,7 @@ class Hint
           white_count += @guess_code.count(color)
         end
       else
-        return 0
+        white_count = 0
       end
     end
     return white_count
