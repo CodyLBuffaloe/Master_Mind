@@ -46,6 +46,11 @@ require "./hint.rb"
     end
 
     def play
+      puts "Welcome, huuuman. Press 1 to be the codebreaker, or press 2 to make a code."
+      answer = gets.chomp
+      if( answer == 2.to_s )
+        puts "Computer's in charge"
+      end
       while @guesses <= 12
         puts "\n"
         puts solicit_guess

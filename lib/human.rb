@@ -5,8 +5,6 @@ module MasterMind
         @name = input.fetch(:name)
       end
 
-      def guesses
-        guesses = 12
-      end
+
     end
 end
