@@ -38,7 +38,6 @@ class Board
       else
         return :not_yet
       end
-      puts "#game_over got called"
     end
 
    private

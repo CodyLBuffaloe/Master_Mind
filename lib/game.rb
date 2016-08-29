@@ -49,7 +49,6 @@ require "./hint.rb"
       while @guesses <= 12
         puts "\n"
         puts solicit_guess
-        puts @secret_code
         this_guess = get_guess()
         puts "\n\n"
         puts board.draw_guess_grid(this_guess)
@@ -61,10 +60,8 @@ require "./hint.rb"
         if(board.game_over() == :winner || board.game_over() == :not_yet)
           game_over_message(message)
         end
-
         @guesses +=1
       end
-      p @secret_code
     end
 
   end

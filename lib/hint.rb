@@ -22,10 +22,6 @@ class Hint
     black_count = get_black()
     white_count = get_white()
     hint_display = []
-    puts "BC"
-    puts black_count
-    puts "WC"
-    puts white_count
     black_count.times do
       hint_display << @hint_colors[0]
     end
@@ -44,9 +40,6 @@ class Hint
     (12 - spaces_filled).times do
       puts "_ _ _ _"
     end
-    puts black_count
-    puts white_count
-    puts empty_count
   end
 
   def get_empties()
