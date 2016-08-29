@@ -29,18 +29,12 @@ class Hint
     black_count.times do
       hint_display << @hint_colors[0]
     end
-      if(white_count > black_count)
-        (white_count - black_count).times do
-          hint_display << @hint_colors[1]
-        end
-      else
-        white_count.times do
-          hint_display << @hint_colors[1]
-        end
-      end
-      empty_count.times do
-        hint_display << "_"
-      end
+    white_count.times do
+      hint_display << @hint_colors[1]
+    end
+    empty_count.times do
+      hint_display << "_"
+    end
 
     @all_hints << hint_display.join(",")
     @all_hints.each do |line|
@@ -84,11 +78,7 @@ class Hint
       end
       if(@correct_code.include?(color))
         if(@correct_code[index] != @guess_code[index])
-          if(@guess_code.count(color) > @correct_code.count(color))
-            white_count += @correct_code.count(color)
-          else
-            white_count += @guess_code.count(color)
-          end
+            white_count += 1
         end
       else
         next
