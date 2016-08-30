@@ -13,8 +13,23 @@ require "./hint.rb"
       @guesses = guesses
       @secret_code = @computer.create_code()
       @hint = Hint.new
+      @codemaker
+      @codebreaker
     end
 
+    def determine_players()
+      puts "Welcome, huuuman. Press 1 to be the codebreaker, or press 2 to make a code."
+      answer = gets.chomp
+      if( answer == 2.to_s )
+        @codebreaker = :computer
+        @codemaker = :human
+        puts "#{@codebreaker}, #{@codemaker}"
+      elsif( answer == 1.to_s )
+        @codebreaker = :human
+        @codemaker = :computer
+        puts "#{@codebreaker}, #{@codemaker}"
+      end
+    end
     def get_guess(guess = gets.split())
       current_guess = []
       guess.each do |x|
@@ -46,14 +61,10 @@ require "./hint.rb"
     end
 
     def play
-      puts "Welcome, huuuman. Press 1 to be the codebreaker, or press 2 to make a code."
-      answer = gets.chomp
-      if( answer == 2.to_s )
-        puts "Computer's in charge"
-      end
+      puts determine_players()
       while @guesses <= 12
         puts "\n"
-        puts solicit_guess
+        puts solicit_guess()
         this_guess = get_guess()
         puts "\n\n"
         puts board.draw_guess_grid(this_guess)
