@@ -15,6 +15,7 @@ require "./hint.rb"
       @hint = Hint.new
       @codemaker
       @codebreaker
+
     end
 
     def determine_players()
@@ -62,19 +63,26 @@ require "./hint.rb"
 
     def play
       puts determine_players()
+
       while @guesses <= 12
-        puts "\n"
-        puts solicit_guess()
-        this_guess = get_guess()
-        puts "\n\n"
-        puts board.draw_guess_grid(this_guess)
-        puts "\n\n"
-        correct_code = @secret_code
-        puts @hint.draw_hint_grid(this_guess, correct_code)
-        board.win?(secret_code, this_guess)
-        message = board.game_over
-        if(board.game_over() == :winner || board.game_over() == :not_yet)
-          game_over_message(message)
+        if(@codebreaker == :human)
+          puts "\n"
+          puts solicit_guess()
+          this_guess = get_guess()
+          puts "\n\n"
+          puts board.draw_guess_grid(this_guess)
+          puts "\n\n"
+          correct_code = @secret_code
+          puts @hint.draw_hint_grid(this_guess, correct_code)
+          board.win?(secret_code, this_guess)
+          message = board.game_over
+          if(board.game_over() == :winner || board.game_over() == :not_yet)
+            game_over_message(message)
+          end
+        else
+          puts "Okay, huuman, make a code of four of these colors (repeats okay): \n red, blue, orange, green, yellow, purple"
+          @secret_code = gets.split()
+          @secret_code.map!{ |x| x.to_sym}
         end
         @guesses +=1
       end
