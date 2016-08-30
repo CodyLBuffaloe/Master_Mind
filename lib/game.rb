@@ -40,7 +40,11 @@ require "./hint.rb"
     end
 
     def solicit_guess
-      puts "Player, enter four of the six following colors to make your guess at the code:\n red, blue, green, yellow, purple and orange"
+      if(@codebreaker == :human)
+        puts "Player, enter four of the six following colors to make your guess at the code:\n red, blue, green, yellow, purple and orange"
+      elsif(@codebreaker == :computer)
+        puts "Now the computer will take a guess at the code:"
+      end
     end
 
     def game_over_message(message)
@@ -64,8 +68,8 @@ require "./hint.rb"
     def play
       puts determine_players()
 
-      while @guesses <= 12
-        if(@codebreaker == :human)
+      if(@codebreaker == :human)
+        while @guesses <= 12
           puts "\n"
           puts solicit_guess()
           this_guess = get_guess()
@@ -79,15 +83,22 @@ require "./hint.rb"
           if(board.game_over() == :winner || board.game_over() == :not_yet)
             game_over_message(message)
           end
-        else
+          @guesses +=1
+        end
+
+      else
           puts "Okay, huuman, make a code of four of these colors (repeats okay): \n red, blue, orange, green, yellow, purple"
           @secret_code = gets.split()
           @secret_code.map!{ |x| x.to_sym}
-        end
-        @guesses +=1
+          while @guesses <= 12
+            puts solicit_guess()
+            this_guess = computer.provide_guess()
+            puts board.draw_guess_grid(this_guess)
+            @guesses += 1
+          end
+
       end
     end
-
   end
 
 
