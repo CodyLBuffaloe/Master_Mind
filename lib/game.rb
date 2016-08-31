@@ -7,11 +7,11 @@ require "./hint.rb"
     attr_reader :players, :board, :guesses, :guess, :computer
     attr_accessor :secret_code
 
-    def initialize(board = Board.new, guesses = 1, computer = Computer.new)
-      @board = board
-      @computer = computer
-      @guesses = guesses
-      @secret_code = @computer.create_code()
+    def initialize()
+      @board = Board.new
+      @computer = Computer.new
+      @guesses = 1
+      @secret_code
       @hint = Hint.new
       @codemaker
       @codebreaker
@@ -83,11 +83,13 @@ require "./hint.rb"
       puts determine_players()
 
       if(@codebreaker == :human)
+        @secret_code = @computer.create_code()
         while @guesses <= 12
           puts "\n"
           puts solicit_guess()
           puts @secret_code
           this_guess = get_guess()
+          puts this_guess.class
           puts "\n\n"
           puts board.draw_guess_grid(this_guess)
           puts "\n\n"

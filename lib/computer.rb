@@ -8,7 +8,16 @@
         @color_set = Colors.new.color_set
       end
 
-      def create_code
+      def create_code()
+        return generate_set()
+      end
+    def provide_guess()
+      @code = []
+      guess = create_code()
+      return guess
+    end
+
+      def generate_set
         #randomly generates a 4 element array of nums between 1 and 6
         while @code.size <= 3
           @code << rand(1..6)
@@ -21,11 +30,9 @@
             end
           end
         end
-        @code = @code.join(",")
+        return @code
       end
-    def provide_guess()
-      return [:red, :blue, :yellow, :green]
-    end
+
 
 
   end

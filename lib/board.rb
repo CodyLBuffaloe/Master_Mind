@@ -12,6 +12,10 @@ class Board
 
 
     def draw_guess_grid(current_guess)
+      if(current_guess.class == String)
+        current_guess.split(",")
+        @all_guesses << current_guess.join(",")
+      end
       @all_guesses << current_guess.join(",")
       @all_guesses.each do |line|
         puts line
