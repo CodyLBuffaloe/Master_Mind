@@ -65,8 +65,10 @@ require "./hint.rb"
             puts "The computer guessed the code! Bow to our robot overlords! Would you like to play again, puny human?"
             answer = gets.chomp
           when :not_yet
-            puts "The computer was not able to guess the code! We are safe once again from robot domination! \n Tempt fate again, human? Type yes or no."
-            answer = gets.chomp
+            if(@guesses == 12)
+              puts "The computer was not able to guess the code! We are safe once again from robot domination! \n Tempt fate again, human? Type yes or no."
+              answer = gets.chomp
+            end
         end
 
       end
