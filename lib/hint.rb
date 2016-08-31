@@ -59,8 +59,10 @@ class Hint
   def get_black()
     black_count = 0
     @guess_code.each_with_index do |color, index|
-      if(@correct_code.include?(color) && @guess_code[index] == @correct_code[index])
-        black_count +=1
+      if(@correct_code.include?(color))
+        if(@guess_code[index] == @correct_code[index])
+          black_count +=1
+        end
       end
     end
     return black_count

@@ -48,15 +48,27 @@ require "./hint.rb"
     end
 
     def game_over_message(message)
-      case message
-        when :winner
-          puts "Congrats, you won! Would you like to play again? 'yes' or 'no' "
-          answer = gets.chomp
-        when :not_yet
-          if(@guesses == 12)
-            puts "You didn't yet guess the code! Would you like to try again? Type yes or no."
+      if(@codebreaker == :human)
+        case message
+          when :winner
+            puts "Congrats, you won! Would you like to play again? 'yes' or 'no' "
             answer = gets.chomp
-          end
+          when :not_yet
+            if(@guesses == 12)
+              puts "You didn't yet guess the code! Would you like to try again? Type yes or no."
+              answer = gets.chomp
+            end
+        end
+      elsif(@codebreaker == :computer)
+        case message
+          when :winner
+            puts "The computer guessed the code! Bow to our robot overlords! Would you like to play again, puny human?"
+            answer = gets.chomp
+          when :not_yet
+            puts "The computer was not able to guess the code! We are safe once again from robot domination! \n Tempt fate again, human? Type yes or no."
+            answer = gets.chomp
+        end
+
       end
       if(answer == "yes")
         Game.new.play
@@ -105,7 +117,6 @@ require "./hint.rb"
             end
             @guesses += 1
           end
-
       end
     end
   end
