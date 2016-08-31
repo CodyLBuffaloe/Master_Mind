@@ -16,8 +16,12 @@ class Hint
 
   def draw_hint_grid(this_guess, correct_code)
     @guess_code = this_guess
-    @correct_code = correct_code.split(",")
-    @correct_code.map!{|x| x.to_sym}
+    if(correct_code.class != Array)
+      @correct_code = correct_code.split(",")
+      @correct_code.map!{|x| x.to_sym}
+    else
+      @correct_code = correct_code
+    end
     empty_count = get_empties()
     black_count = get_black()
     white_count = get_white()
@@ -45,7 +49,7 @@ class Hint
   def get_empties()
     empties = 0
     @guess_code.each do |color|
-      if(!@correct_code.include?(color))
+      if(@correct_code.include?(color) == false)
         empties += 1
       end
     end

@@ -23,8 +23,12 @@ class Board
     end
 
     def win?(secret_code, this_guess)
-      secret_code = secret_code.split(",")
-      secret_code.map!{ |x| x.to_sym}
+      if(secret_code.class != Array)
+        secret_code = secret_code.split(",")
+        secret_code.map!{ |x| x.to_sym}
+      else
+        secret_code = secret_code
+      end
       if(secret_code == this_guess)
         @winner = true
       else
