@@ -84,6 +84,7 @@ require "./hint.rb"
         while @guesses <= 12
           puts "\n"
           puts solicit_guess()
+          puts @secret_code
           this_guess = get_guess()
           puts "\n\n"
           puts board.draw_guess_grid(this_guess)

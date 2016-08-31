@@ -26,14 +26,16 @@ class Hint
     black_count = get_black()
     white_count = get_white()
     hint_display = []
-    black_count.times do
-      hint_display << @hint_colors[0]
-    end
-    white_count.times do
-      hint_display << @hint_colors[1]
-    end
-    empty_count.times do
-      hint_display << "_"
+    while hint_display.count() < 4
+      black_count.times do
+        hint_display << @hint_colors[0]
+      end
+      white_count.times do
+        hint_display << @hint_colors[1]
+      end
+      empty_count.times do
+        hint_display << "_"
+      end
     end
 
     @all_hints << hint_display.join(",")
@@ -49,7 +51,11 @@ class Hint
   def get_empties()
     empties = 0
     @guess_code.each do |color|
-      if(@correct_code.include?(color) == false)
+      if(@guess_code.count(color) == 4)
+        if(@correct_code.include?(color))
+          empties = (@guess_code.count(color) - @correct_code.count(color))
+        end
+      elsif(@correct_code.include?(color) == false)
         empties += 1
       end
     end
