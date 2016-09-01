@@ -115,6 +115,7 @@ require "./hint.rb"
             puts "\n\n"
             correct_code = @secret_code
             puts @hint.draw_hint_grid(this_guess, correct_code)
+
             board.win?(secret_code, this_guess)
             message = board.game_over()
             if(board.game_over() == :winner || board.game_over() == :not_yet)

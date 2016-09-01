@@ -1,6 +1,7 @@
 
   class Computer
     require "./colors"
+    require "./hint"
       attr_accessor :code, :color_set
 
       def initialize
@@ -32,7 +33,11 @@
         end
         return @code
       end
-
+    def hint_eval(empties, blacks, whites)
+      puts empties
+      puts blacks
+      puts whites
+    end
 
 
   end
