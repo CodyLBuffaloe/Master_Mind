@@ -46,7 +46,6 @@ class Hint
     (12 - spaces_filled).times do
       puts "_ _ _ _"
     end
-    Computer:hint_eval(empty_count, black_count, white_count)
   end
 
   def get_empties()

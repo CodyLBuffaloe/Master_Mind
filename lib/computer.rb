@@ -33,12 +33,21 @@
         end
         return @code
       end
-    def hint_eval(empties, blacks, whites)
-      puts empties
-      puts blacks
-      puts whites
+    def create_full_combos()
+      all_combos = Array.new(1296) {Array.new(4)}
+      all_combos.each do |sub|
+        sub.each do |a|
+          a << generate_set()
+        end
+      end
+      puts all_combos.length
+      puts all_combos[3].class
+      puts all_combos[1265].class
+      puts all_combos[1150]
+
     end
-
-
   end
+
+  c = Computer.new
+  c.create_full_combos()
 
