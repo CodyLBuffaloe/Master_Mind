@@ -35,12 +35,26 @@
       end
     def create_full_combos()
       all_combos = Array.new(1296) {Array.new(4) {Array.new}}
-
+      all_combos.each do |a|
+        for i in 1..6
+          a[0] << i
+        end
+        for j in 1..6
+          a[1] << j
+        end
+        for k in 1..6
+          a[2] << k
+        end
+        for l in 1..6
+          a[3] << l
+        end
+      end
       puts all_combos.length
       puts all_combos[3].class
       puts all_combos[1265].class
       puts all_combos[1200][1].class
-      puts all_combos[1150]
+      puts all_combos[1150][1].length
+      puts all_combos[1150][1]
 
     end
   end
