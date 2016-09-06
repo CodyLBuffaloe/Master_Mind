@@ -34,15 +34,12 @@
         return @code
       end
     def create_full_combos()
-      all_combos = Array.new(1296) {Array.new(4)}
-      all_combos.each do |sub|
-        sub.each do |a|
-          a << generate_set()
-        end
-      end
+      all_combos = Array.new(1296) {Array.new(4) {Array.new}}
+
       puts all_combos.length
       puts all_combos[3].class
       puts all_combos[1265].class
+      puts all_combos[1200][1].class
       puts all_combos[1150]
 
     end
