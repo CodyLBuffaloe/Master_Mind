@@ -34,27 +34,27 @@
         return @code
       end
     def create_full_combos()
-      all_combos = Array.new(1296) {Array.new(4) {Array.new}}
-      all_combos.each do |a|
+    # push a section of four numbers to each array subscript, until no array is empty
+    all_combos = []
         for i in 1..6
-          a[0] << i
+          for j in 1..6
+            for k in 1..6
+              for l in 1..6
+                permutation = [i, j, k, l]
+                all_combos << permutation
+              end
+            end
+          end
         end
-        for j in 1..6
-          a[1] << j
-        end
-        for k in 1..6
-          a[2] << k
-        end
-        for l in 1..6
-          a[3] << l
-        end
-      end
-      puts all_combos.length
+
+
+     puts all_combos.length
       puts all_combos[3].class
       puts all_combos[1265].class
       puts all_combos[1200][1].class
-      puts all_combos[1150][1].length
       puts all_combos[1150][1]
+      puts all_combos[1150][3]
+      puts all_combos[1255]
 
     end
   end
