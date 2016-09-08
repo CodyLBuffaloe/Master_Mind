@@ -35,7 +35,7 @@
       end
     def create_full_combos()
     # push a section of four numbers to each array subscript, until no array is empty
-    all_combos = []
+      all_combos = []
         for i in 1..6
           for j in 1..6
             for k in 1..6
@@ -46,14 +46,20 @@
             end
           end
         end
+      all_combos.each do |sub|
+        sub.each_with_index do |el, index|
+          @color_set.each do |key, value|
+            if(sub[index] == key)
+              sub[index] = value
+            end
+          end
+        end
+      end
 
-
-     puts all_combos.length
+      puts all_combos.length
       puts all_combos[3].class
       puts all_combos[1265].class
       puts all_combos[1200][1].class
-      puts all_combos[1150][1]
-      puts all_combos[1150][3]
       puts all_combos[1255]
 
     end
