@@ -115,7 +115,7 @@ require "./hint.rb"
             puts "\n\n"
             correct_code = @secret_code
             puts @hint.draw_hint_grid(this_guess, correct_code)
-            num_correct = 3
+            num_correct = @hint.get_black() + @hint.get_white()
             @computer.successful_guess(num_correct)
             board.win?(secret_code, this_guess)
             message = board.game_over()
