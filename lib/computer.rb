@@ -57,7 +57,14 @@
       create_full_combos()
       return @all_combos.sample()
     end
+
+    def successful_guess(counts)
+      puts counts
+    end
+
   end
+
+
 
   c = Computer.new
   c.create_full_combos()

@@ -1,4 +1,5 @@
 require "./colors.rb"
+
 class Hint
   def initialize()
     @guess_code
