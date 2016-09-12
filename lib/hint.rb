@@ -27,7 +27,7 @@ class Hint
     black_count = get_black()
     white_count = get_white()
     hint_display = []
-    while hint_display.count() < 4
+    until hint_display.length >= 4
       black_count.times do
         hint_display << @hint_colors[0]
       end
@@ -68,7 +68,7 @@ class Hint
     @guess_code.each_with_index do |color, index|
       if(@correct_code.include?(color))
         if(@guess_code[index] == @correct_code[index])
-          black_count +=1
+            black_count +=1
         end
       end
     end
@@ -77,19 +77,19 @@ class Hint
 
   def get_white()
     white_count = 0
-    @guess_code.each_with_index do |color, index|
-      if( @correct_code.include?(color) && @guess_code.count(color) == 4)
-        white_count = 0
-        break
-      end
-      if(@correct_code.include?(color))
-        if(@correct_code[index] != @guess_code[index])
-            white_count += 1
-        end
-      else
-        next
-      end
-    end
+   @guess_code.each_with_index do |color, index|
+         if( @correct_code.include?(color) && @guess_code.count(color) == 4)
+           white_count = 0
+           break
+         end
+           if(@correct_code.include?(color))
+             if(@correct_code[index] != @guess_code[index])
+                 white_count += 1
+             end
+           else
+             next
+           end
     return white_count
+   end
   end
 end
