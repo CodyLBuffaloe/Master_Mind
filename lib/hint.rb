@@ -6,6 +6,7 @@ class Hint
     @correct_code
     @hint_colors = Colors.new.hint_colors
     @all_hints = []
+    @color_list = [:red, :blue, :yellow, :green , :purple, :orange]
   end
 
 
@@ -27,7 +28,7 @@ class Hint
     black_count = get_black()
     white_count = get_white()
     hint_display = []
-    until hint_display.length >= 4
+
       black_count.times do
         hint_display << @hint_colors[0]
       end
@@ -37,7 +38,6 @@ class Hint
       empty_count.times do
         hint_display << "_"
       end
-    end
 
     @all_hints << hint_display.join(",")
     @all_hints.each do |line|
@@ -49,19 +49,7 @@ class Hint
     end
   end
 
-  def get_empties()
-    empties = 0
-    @guess_code.each do |color|
-      if(@guess_code.count(color) == 4)
-        if(@correct_code.include?(color))
-          empties = (@guess_code.count(color) - @correct_code.count(color))
-        end
-      elsif(@correct_code.include?(color) == false)
-        empties += 1
-      end
-    end
-    return empties
-  end
+
 
   def get_black()
     black_count = 0
@@ -77,19 +65,25 @@ class Hint
 
   def get_white()
     white_count = 0
-   @guess_code.each_with_index do |color, index|
-         if( @correct_code.include?(color) && @guess_code.count(color) == 4)
-           white_count = 0
-           break
-         end
-           if(@correct_code.include?(color))
-             if(@correct_code[index] != @guess_code[index])
-                 white_count += 1
-             end
-           else
-             next
-           end
+    match_count = 0
+    @color_list.each do |color|
+      guess_count = @guess_code.count(color)
+      code_count = @correct_code.count(color)
+      if(guess_count >= code_count)
+        match_count += code_count
+      elsif(guess_count < code_count)
+        match_count += guess_count
+      end
+    end
+    black_count = get_black()
+    white_count = (match_count - black_count)
     return white_count
-   end
+  end
+  def get_empties()
+    empties = 0
+    black_count = get_black()
+    white_count = get_white()
+    empties = 4 - (white_count + black_count)
+    return empties
   end
 end
