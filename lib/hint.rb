@@ -2,8 +2,6 @@ require "./colors.rb"
 
 class Hint
   def initialize()
-    @guess_code
-    @correct_code
     @hint_colors = Colors.new.hint_colors
     @all_hints = []
     @color_list = [:red, :blue, :yellow, :green , :purple, :orange]
@@ -17,16 +15,17 @@ class Hint
 #appearences in correct_code
 
   def draw_hint_grid(this_guess, correct_code)
-    @guess_code = this_guess
+    guess_code = this_guess
     if(correct_code.class != Array)
-      @correct_code = correct_code.split(",")
-      @correct_code.map!{|x| x.to_sym}
+      correct_code = correct_code.split(",")
+      correct_code.map!{|x| x.to_sym}
     else
-      @correct_code = correct_code
+      correct_code = correct_code
     end
-    empty_count = get_empties()
-    black_count = get_black()
-    white_count = get_white()
+
+    black_count = get_black(guess_code, correct_code)
+    white_count = get_white(guess_code, correct_code, black_count)
+    empty_count = get_empties(guess_code, correct_code, black_count, white_count)
     hint_display = []
 
       black_count.times do
@@ -51,11 +50,11 @@ class Hint
 
 
 
-  def get_black()
+  def get_black(guess_code, correct_code)
     black_count = 0
-    @guess_code.each_with_index do |color, index|
-      if(@correct_code.include?(color))
-        if(@guess_code[index] == @correct_code[index])
+    guess_code.each_with_index do |color, index|
+      if(correct_code.include?(color))
+        if(guess_code[index] == correct_code[index])
             black_count +=1
         end
       end
@@ -63,26 +62,23 @@ class Hint
     return black_count
   end
 
-  def get_white()
+  def get_white(guess_code, correct_code, black_count)
     white_count = 0
     match_count = 0
     @color_list.each do |color|
-      guess_count = @guess_code.count(color)
-      code_count = @correct_code.count(color)
+      guess_count = guess_code.count(color)
+      code_count = correct_code.count(color)
       if(guess_count >= code_count)
         match_count += code_count
       elsif(guess_count < code_count)
         match_count += guess_count
       end
     end
-    black_count = get_black()
     white_count = (match_count - black_count)
     return white_count
   end
-  def get_empties()
+  def get_empties(guess_code, correct_code, black_count, white_count)
     empties = 0
-    black_count = get_black()
-    white_count = get_white()
     empties = 4 - (white_count + black_count)
     return empties
   end
