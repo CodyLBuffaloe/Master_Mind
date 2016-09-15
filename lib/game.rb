@@ -107,16 +107,22 @@ require "./hint.rb"
           puts "Okay, huuman, make a code of four of these colors (repeats okay): \n red, blue, orange, green, yellow, purple"
           @secret_code = gets.split()
           @secret_code.map!{ |x| x.to_sym}
+          correct_code = @secret_code
+          hint = @hint
           while @guesses <= 12
             puts solicit_guess()
-            this_guess = computer.provide_guess()
+            if(@guesses == 1)
+              this_guess = computer.provide_first_guess()
+            else
+              this_guess = computer.provide_next_guess()
+            end
+            @computer.remove_losers(hint, this_guess, correct_code)
             puts "\n\n"
             puts board.draw_guess_grid(this_guess)
             puts "\n\n"
-            correct_code = @secret_code
             puts @hint.draw_hint_grid(this_guess, correct_code)
-            num_correct = @hint.get_black() + @hint.get_white()
-            @computer.successful_guess(num_correct)
+            #num_correct = @hint.get_black() + @hint.get_white()
+            #@computer.successful_guess(num_correct)
             board.win?(secret_code, this_guess)
             message = board.game_over()
             if(board.game_over() == :winner || board.game_over() == :not_yet)

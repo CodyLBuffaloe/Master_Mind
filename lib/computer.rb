@@ -8,6 +8,7 @@
         @code = []
         @color_set = Colors.new.color_set
         @all_combos = []
+        @guess
       end
 
       def create_code()
@@ -53,13 +54,29 @@
       end
     end
 
-    def provide_guess()
+    def provide_first_guess()
       create_full_combos()
-      return @all_combos.sample()
+      guess = @all_combos.sample()
+      return guess
     end
 
-    def successful_guess(counts)
-      puts counts
+    def remove_losers(hint, this_guess, correct_code)
+      black_count = hint.get_black(this_guess, correct_code)
+      white_count = hint.get_white(this_guess, correct_code, black_count)
+      match_count = black_count + white_count
+      @all_combos.each do |sub|
+        test_black_count = hint.get_black(sub, this_guess)
+        test_white_count = hint.get_white(sub, this_guess, test_black_count)
+        test_match_count = test_black_count + test_white_count
+        if(test_match_count < match_count)
+          @all_combos.delete(sub)
+        end
+      end
+    end
+
+    def provide_next_guess()
+      guess = @all_combos.sample()
+      return guess
     end
 
   end
