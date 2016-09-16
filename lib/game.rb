@@ -113,6 +113,7 @@ require "./hint.rb"
             puts solicit_guess()
             if(@guesses == 1)
               this_guess = computer.provide_first_guess()
+
             else
               this_guess = computer.provide_next_guess()
             end
