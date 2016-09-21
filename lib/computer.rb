@@ -70,6 +70,7 @@
           @all_combos.delete(sub)
         end
       end
+      puts @all_combos.size
     end
 
     def provide_next_guess()
@@ -78,9 +79,3 @@
     end
 
   end
-
-
-
-  c = Computer.new
-  c.create_full_combos()
-

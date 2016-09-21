@@ -119,7 +119,6 @@ require "./hint.rb"
               this_guess = computer.provide_next_guess()
               @computer.remove_losers(hint, this_guess, previous_guess)
             end
-
             puts "\n\n"
             puts board.draw_guess_grid(this_guess)
             puts "\n\n"
