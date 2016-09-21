@@ -61,14 +61,12 @@
     end
 
     def remove_losers(hint, this_guess, correct_code)
-      black_count = hint.get_black(this_guess, correct_code)
-      white_count = hint.get_white(this_guess, correct_code, black_count)
-      match_count = black_count + white_count
+      bc = hint.get_black(this_guess, correct_code)
+      wc = hint.get_white(this_guess, correct_code, bc)
       @all_combos.each do |sub|
-        test_black_count = hint.get_black(sub, this_guess)
-        test_white_count = hint.get_white(sub, this_guess, test_black_count)
-        test_match_count = test_black_count + test_white_count
-        if(test_match_count < match_count)
+        tbc = hint.get_black(sub, this_guess)
+        twc = hint.get_white(sub, this_guess, tbc)
+        if((tbc != bc) && (twc != wc))
           @all_combos.delete(sub)
         end
       end
