@@ -113,12 +113,11 @@ require "./hint.rb"
             puts solicit_guess()
             if(@guesses == 1)
               this_guess = computer.provide_first_guess()
-              previous_guess = this_guess
-              @computer.remove_losers(hint, this_guess, correct_code)
+
             else
               this_guess = computer.provide_next_guess()
-              @computer.remove_losers(hint, this_guess, previous_guess)
             end
+            @computer.remove_losers(hint, this_guess, correct_code)
             puts "\n\n"
             puts board.draw_guess_grid(this_guess)
             puts "\n\n"
