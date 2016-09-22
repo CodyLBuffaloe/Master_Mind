@@ -66,9 +66,20 @@
       @all_combos.each do |sub|
         tbc = hint.get_black(sub, this_guess)
         twc = hint.get_white(sub, this_guess, tbc)
-        if((tbc != bc) && (twc != wc))
+        if((bc + wc == 4) && (tbc + twc != 4))
           @all_combos.delete(sub)
         end
+        if((bc + wc == 0) && (tbc + twc == 4))
+          @all_combos.delete(sub)
+        end
+        if((tbc != bc) || (twc != wc))
+          @all_combos.delete(sub)
+        end
+        if((tbc + twc == 0))
+          @all_combos.delete(sub)
+        end
+
+
       end
       puts @all_combos.size
     end
