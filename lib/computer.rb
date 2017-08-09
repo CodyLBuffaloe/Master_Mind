@@ -1,7 +1,7 @@
 
   class Computer
-    require "./colors"
-    require "./hint"
+    require_relative "colors"
+    require_relative "hint"
       attr_accessor :code, :color_set
 
       def initialize

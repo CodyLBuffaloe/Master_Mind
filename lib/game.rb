@@ -1,6 +1,6 @@
-require "./board.rb"
-require "./computer.rb"
-require "./hint.rb"
+require_relative "board"
+require_relative "computer"
+require_relative "hint"
 
 
   class Game
@@ -87,7 +87,6 @@ require "./hint.rb"
         while @guesses <= 12
           puts "\n"
           puts solicit_guess()
-          puts @secret_code
           this_guess = get_guess()
           puts this_guess.class
           puts "\n\n"

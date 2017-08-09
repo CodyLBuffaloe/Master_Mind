@@ -1,6 +1,5 @@
-
+require_relative 'block'
 class Board
-    require './block'
     attr_reader :guess_grid, :hint_grid
     attr_accessor :all_guesses
     def initialize(input = {})

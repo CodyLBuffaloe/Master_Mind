@@ -1,4 +1,4 @@
-require "./colors.rb"
+require_relative "colors"
 
 class Hint
   def initialize()
