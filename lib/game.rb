@@ -88,7 +88,6 @@ require_relative "hint"
           puts "\n"
           puts solicit_guess()
           this_guess = get_guess()
-          puts this_guess.class
           puts "\n\n"
           puts board.draw_guess_grid(this_guess)
           puts "\n\n"
